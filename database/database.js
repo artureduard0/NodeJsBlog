@@ -1,17 +1,17 @@
 const { Sequelize } = require('sequelize');
-const sequelize = require('sequelize');
+
 const connection = new Sequelize(
-    'blog', //nome do banco
-    'root', // nome do usuário master
-    'root', // senha do usuário master
+    process.env.DB_NAME, //nome do banco
+    process.env.DB_USER, // nome do usuário master
+    process.env.DB_PASSWORD, // senha do usuário master
     {
-        host: 'localhost', // endereço do servidor
+        host: process.env.DB_HOST, // endereço do servidor
         dialect: 'mysql', // tipo do banco
         dialectOptions: {
             dateStrings: true,
             typeCast: true
         },
-        timezone: '-03:00',
+        timezone: process.env.DB_TIMEZONE,
         logging: false // desabilita o log dos comandos no console
     }
 );
