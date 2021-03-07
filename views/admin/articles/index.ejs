@@ -1,0 +1,44 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/navbar.ejs'); %>
+<body style="background-color: lightgray;">
+    <div class="container">
+        <h2>Artigos</h2>
+        <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
+        <table class="table" style="margin-top: 2vh; background-color: white;">
+            <thead>
+                <tr class="bg-primary" style="color: white;">
+                    <th width="10%">ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach((article) => { %>
+                    <tr>
+                        <th><%= article.id %></th>
+                        <th><%= article.title %></th>
+                        <th><%= article.slug %></th>
+                        <th><%= article.category.title %></th>
+                        <th>
+                            <form method="GET" style="display: inline;" action="/admin/articles/edit/<%= article.id %>">
+                                <button class="btn btn-warning">Editar</button>
+                            </form>
+                            <form method="POST" style="display: inline;" action="/admin/articles/delete/<%= article.id %>" onsubmit="javascript:deleteWarning(event, this)">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </th>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    function deleteWarning(event, form) {
+        event.preventDefault();
+        confirm('Você deseja deletar esse artigo?') ? form.submit() : false;
+    }
+</script>
+<%- include('../../partials/footer.ejs'); %>

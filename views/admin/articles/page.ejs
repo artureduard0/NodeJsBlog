@@ -1,0 +1,31 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/homeNavbar.ejs'); %>
+<body style="background-color: lightgray;">
+    <div class="container">
+        <% result.articles.rows.forEach(article => { %>
+            <div class="card" style="margin-top: 3vh;">
+                <div class="card-body"> 
+                    <h5 class="card-title"><%= article.title.toUpperCase() %></h5>
+                    <hr>
+                    <p class="card-text"><%= article.body.substring(0,60).replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "") %></p>
+                    <a href="/<%= article.slug %>" class="card-link">Ler o artigo</a>
+                </div>
+            </div>
+        <% }) %>
+
+        <div class="row" style="margin-top: 2vh; margin-bottom: 4vh;">
+            <div class="col col-12">
+                <% if (result.page > 2) { %>
+                    <a class="float-left" href="/articles/get/<%= result.page - 1 %>">Página anterior</a>
+                <% } else if (result.page == 2) { %>
+                    <a class="float-left" href="/">Página anterior</a>
+                <% } %>
+
+                <% if (result.next) { %>
+                    <a class="float-right" href="/articles/get/<%= result.page + 1 %>">Próxima página</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include('../../partials/footer.ejs'); %>

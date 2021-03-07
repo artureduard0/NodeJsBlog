@@ -1,0 +1,33 @@
+<%- include('partials/header.ejs'); %>
+<%- include('partials/homeNavbar.ejs'); %>
+<body style="background-color: lightgray;">
+    <div class="container">
+        <div class="jumbotron" style="margin-top: 3vh;">
+            <h1 class="display-4">Bem-vindo!</h1>
+            <p class="lead">Esse é um simples blog para aprender mais sobre o desenvolvimento node.</p>
+            <hr class="my-4">
+            <p>Mais informações em:</p>
+            <p class="lead">
+              <a class="btn btn-primary" href="#" role="button">Ler mais</a>
+            </p>
+        </div>
+
+        <% articles.forEach(article => { %>
+            <div class="card" style="margin-top: 3vh;">
+                <div class="card-body"> 
+                    <h5 class="card-title"><%= article.title.toUpperCase() %></h5>
+                    <hr>
+                    <p class="card-text"><%= article.body.substring(0,60).replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "") %></p>
+                    <a href="/<%= article.slug %>" class="card-link">Ler o artigo</a>
+                </div>
+            </div>
+        <% }) %>
+
+        <div class="row float-right" style="margin-top: 2vh; margin-bottom: 4vh;">
+            <div class="col col-12">
+                <a href="/articles/get/2">Ver mais artigos...</a>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include('partials/footer.ejs'); %>
